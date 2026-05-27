@@ -1,0 +1,550 @@
+use CRUD_DB
+switched to db CRUD_DB
+db["users"].find()
+{
+  _id: ObjectId('6a15c4cf725ede106baad7e3'),
+  name: 'Ashraf',
+  age: 33,
+  email: 'ashraf67@gmail.com',
+  country: 'Afghanistan'
+}
+{
+  _id: ObjectId('6a15c4cf725ede106baad7e4'),
+  name: 'Ritesh',
+  age: 40,
+  email: 'riteshchubey30@gmail.com',
+  country: 'Russia'
+}
+{
+  _id: ObjectId('6a15c4cf725ede106baad7e5'),
+  name: 'Laxmi',
+  age: 25,
+  email: 'laxmi@gmail.com',
+  country: 'Japan'
+}
+use Library_Db
+switched to db Library_Db
+db.createCollection("books")
+{ ok: 1 }
+db["books"].find()
+db.books.insertMany([{
+  title:"Harry Potter",
+  author:"JK Rowling",
+  genre:"Fantasy",
+  price:250,
+  availableCopies:2
+},{
+  title:"3Idiots",
+  author:"Rajkumar Hirani",
+  genre:"Comedy",
+  price:300,
+  availableCopies:0
+},{
+  title:"Love Story",
+  author:"Ritesh Chaubey",
+  genre:"Romance",
+  price:900,
+  availableCopies:3
+},{
+  title:"Bhoot hu Mai..",
+  author:"Ashraf Dala",
+  genre:"Horror",
+  price:350,
+  availableCopies:3
+},{
+  title:"Acopis",
+  author:"Simon Lu",
+  genre:"Fiction",
+  price:400,
+  availableCopies:5
+}])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('6a16666ca4d0074e86ee29a7'),
+    '1': ObjectId('6a16666ca4d0074e86ee29a8'),
+    '2': ObjectId('6a16666ca4d0074e86ee29a9'),
+    '3': ObjectId('6a16666ca4d0074e86ee29aa'),
+    '4': ObjectId('6a16666ca4d0074e86ee29ab')
+  }
+}
+db.books.find()
+{
+  _id: ObjectId('6a16666ca4d0074e86ee29a7'),
+  title: 'Harry Potter',
+  author: 'JK Rowling',
+  genre: 'Fantasy',
+  price: 250,
+  availableCopies: 2
+}
+{
+  _id: ObjectId('6a16666ca4d0074e86ee29a8'),
+  title: '3Idiots',
+  author: 'Rajkumar Hirani',
+  genre: 'Comedy',
+  price: 300,
+  availableCopies: 0
+}
+{
+  _id: ObjectId('6a16666ca4d0074e86ee29a9'),
+  title: 'Love Story',
+  author: 'Ritesh Chaubey',
+  genre: 'Romance',
+  price: 900,
+  availableCopies: 3
+}
+{
+  _id: ObjectId('6a16666ca4d0074e86ee29aa'),
+  title: 'Bhoot hu Mai..',
+  author: 'Ashraf Dala',
+  genre: 'Horror',
+  price: 350,
+  availableCopies: 3
+}
+{
+  _id: ObjectId('6a16666ca4d0074e86ee29ab'),
+  title: 'Acopis',
+  author: 'Simon Lu',
+  genre: 'Fiction',
+  price: 400,
+  availableCopies: 5
+}
+db.books.find({price:{$gt:300},{$lt:800}})
+SyntaxError: Unexpected token (1:31)
+
+> 1 | db.books.find({price:{$gt:300},{$lt:800}})
+    |                                ^
+db.books.find({price:{$gt:300,$lt:800}})
+{
+  _id: ObjectId('6a16666ca4d0074e86ee29aa'),
+  title: 'Bhoot hu Mai..',
+  author: 'Ashraf Dala',
+  genre: 'Horror',
+  price: 350,
+  availableCopies: 3
+}
+{
+  _id: ObjectId('6a16666ca4d0074e86ee29ab'),
+  title: 'Acopis',
+  author: 'Simon Lu',
+  genre: 'Fiction',
+  price: 400,
+  availableCopies: 5
+}
+db.books.find({genre:"Fiction"})
+{
+  _id: ObjectId('6a16666ca4d0074e86ee29ab'),
+  title: 'Acopis',
+  author: 'Simon Lu',
+  genre: 'Fiction',
+  price: 400,
+  availableCopies: 5
+}
+db.books.updateOne({ author:"Ashraf Dalal" },{$set:{price: 600}})
+
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+db.books.updateMany({availableCopies:2},{$inc:{availableCopies:2}})
+
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+db.books.find()
+{
+  _id: ObjectId('6a16666ca4d0074e86ee29a7'),
+  title: 'Harry Potter',
+  author: 'JK Rowling',
+  genre: 'Fantasy',
+  price: 250,
+  availableCopies: 4
+}
+{
+  _id: ObjectId('6a16666ca4d0074e86ee29a8'),
+  title: '3Idiots',
+  author: 'Rajkumar Hirani',
+  genre: 'Comedy',
+  price: 300,
+  availableCopies: 0
+}
+{
+  _id: ObjectId('6a16666ca4d0074e86ee29a9'),
+  title: 'Love Story',
+  author: 'Ritesh Chaubey',
+  genre: 'Romance',
+  price: 900,
+  availableCopies: 3
+}
+{
+  _id: ObjectId('6a16666ca4d0074e86ee29aa'),
+  title: 'Bhoot hu Mai..',
+  author: 'Ashraf Dala',
+  genre: 'Horror',
+  price: 350,
+  availableCopies: 3
+}
+{
+  _id: ObjectId('6a16666ca4d0074e86ee29ab'),
+  title: 'Acopis',
+  author: 'Simon Lu',
+  genre: 'Fiction',
+  price: 400,
+  availableCopies: 5
+}
+db.books.deleteOne({title:"Love Story"})
+{
+  acknowledged: true,
+  deletedCount: 1
+}
+db.books.deleteMany({availableCopies:0})
+{
+  acknowledged: true,
+  deletedCount: 1
+}
+use Hospital_Db
+switched to db Hospital_Db
+db["patients"].find()
+db.patients.insertMany([{
+  name:"Harry ",
+  age:21,
+  disease:"Hiv",
+  doctor:"Ramesh Chako",
+  city:"Pune"
+},{
+  name:"Rajesh",
+  age:32,
+  disease:"Aids",
+  doctor:"Ashok Singh",
+  city:"Mumbai"
+},{
+  name:"Ritesh",
+  age:32,
+  disease:"Diabetes",
+  doctor:"Lakshya shetty",
+  city:"Lucknow"
+},{
+  name:"Ashraf",
+  age:65,
+  disease:"Cough",
+  doctor:"dushyant khan",
+  city:"Surat"
+},{
+  name:"Rahul",
+  age:45,
+  genre:"Fiction",
+  doctor:"Falgun pareikh",
+  city:"manipal"
+}])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('6a166b93a4d0074e86ee29ac'),
+    '1': ObjectId('6a166b93a4d0074e86ee29ad'),
+    '2': ObjectId('6a166b93a4d0074e86ee29ae'),
+    '3': ObjectId('6a166b93a4d0074e86ee29af'),
+    '4': ObjectId('6a166b93a4d0074e86ee29b0')
+  }
+}
+db.patients.find()
+{
+  _id: ObjectId('6a166b93a4d0074e86ee29ac'),
+  name: 'Harry ',
+  age: 21,
+  disease: 'Hiv',
+  doctor: 'Ramesh Chako',
+  city: 'Pune'
+}
+{
+  _id: ObjectId('6a166b93a4d0074e86ee29ad'),
+  name: 'Rajesh',
+  age: 32,
+  disease: 'Aids',
+  doctor: 'Ashok Singh',
+  city: 'Mumbai'
+}
+{
+  _id: ObjectId('6a166b93a4d0074e86ee29ae'),
+  name: 'Ritesh',
+  age: 32,
+  disease: 'Diabetes',
+  doctor: 'Lakshya shetty',
+  city: 'Lucknow'
+}
+{
+  _id: ObjectId('6a166b93a4d0074e86ee29af'),
+  name: 'Ashraf',
+  age: 65,
+  disease: 'Cough',
+  doctor: 'dushyant khan',
+  city: 'Surat'
+}
+{
+  _id: ObjectId('6a166b93a4d0074e86ee29b0'),
+  name: 'Rahul',
+  age: 45,
+  genre: 'Fiction',
+  doctor: 'Falgun pareikh',
+  city: 'manipal'
+}
+db.patients.find({age:{$gt:20,$lt:50}})
+{
+  _id: ObjectId('6a166b93a4d0074e86ee29ac'),
+  name: 'Harry ',
+  age: 21,
+  disease: 'Hiv',
+  doctor: 'Ramesh Chako',
+  city: 'Pune'
+}
+{
+  _id: ObjectId('6a166b93a4d0074e86ee29ad'),
+  name: 'Rajesh',
+  age: 32,
+  disease: 'Aids',
+  doctor: 'Ashok Singh',
+  city: 'Mumbai'
+}
+{
+  _id: ObjectId('6a166b93a4d0074e86ee29ae'),
+  name: 'Ritesh',
+  age: 32,
+  disease: 'Diabetes',
+  doctor: 'Lakshya shetty',
+  city: 'Lucknow'
+}
+{
+  _id: ObjectId('6a166b93a4d0074e86ee29b0'),
+  name: 'Rahul',
+  age: 45,
+  genre: 'Fiction',
+  doctor: 'Falgun pareikh',
+  city: 'manipal'
+}
+db.patients.find({disease:"Diabetes"})
+{
+  _id: ObjectId('6a166b93a4d0074e86ee29ae'),
+  name: 'Ritesh',
+  age: 32,
+  disease: 'Diabetes',
+  doctor: 'Lakshya shetty',
+  city: 'Lucknow'
+}
+db.patients.updateOne({ doctor:"Ashok Singh" },{$set:{name: "Sirish"}})
+
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+db.patients.find()
+{
+  _id: ObjectId('6a166b93a4d0074e86ee29ac'),
+  name: 'Harry ',
+  age: 21,
+  disease: 'Hiv',
+  doctor: 'Ramesh Chako',
+  city: 'Pune'
+}
+{
+  _id: ObjectId('6a166b93a4d0074e86ee29ad'),
+  name: 'Sirish',
+  age: 32,
+  disease: 'Aids',
+  doctor: 'Ashok Singh',
+  city: 'Mumbai'
+}
+{
+  _id: ObjectId('6a166b93a4d0074e86ee29ae'),
+  name: 'Ritesh',
+  age: 32,
+  disease: 'Diabetes',
+  doctor: 'Lakshya shetty',
+  city: 'Lucknow'
+}
+{
+  _id: ObjectId('6a166b93a4d0074e86ee29af'),
+  name: 'Ashraf',
+  age: 65,
+  disease: 'Cough',
+  doctor: 'dushyant khan',
+  city: 'Surat'
+}
+{
+  _id: ObjectId('6a166b93a4d0074e86ee29b0'),
+  name: 'Rahul',
+  age: 45,
+  genre: 'Fiction',
+  doctor: 'Falgun pareikh',
+  city: 'manipal'
+}
+
+db.books.updateMany({age:{$gt:60}},{$inc:{age:1}})
+
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+db.books.deleteOne({name:"Rajesh"})
+{
+  acknowledged: true,
+  deletedCount: 0
+}
+db.books.deleteMany({city:"manipal})
+
+{
+  acknowledged: true,
+  deletedCount: 2
+}
+db.patients.findOne({name:"Rahul"})
+{
+  _id: ObjectId('6a166b93a4d0074e86ee29b0'),
+  name: 'Rahul',
+  age: 45,
+  genre: 'Fiction',
+  doctor: 'Falgun pareikh',
+  city: 'manipal'
+}
+             ^
+db.patients.find({},{name:"Rahul",age:45})
+{
+  _id: ObjectId('6a166b93a4d0074e86ee29ac'),
+  age: 21,
+  name: 'Rahul'
+}
+{
+  _id: ObjectId('6a166b93a4d0074e86ee29af'),
+  age: 66,
+  name: 'Rahul'
+}
+{
+  _id: ObjectId('6a166b93a4d0074e86ee29b0'),
+  age: 45,
+  name: 'Rahul'
+}
+db.patients.find().sort({age:1})
+{
+  _id: ObjectId('6a166b93a4d0074e86ee29ac'),
+  name: 'Harry ',
+  age: 21,
+  disease: 'Hiv',
+  doctor: 'Ramesh Chako',
+  city: 'Pune'
+}
+{
+  _id: ObjectId('6a166b93a4d0074e86ee29b0'),
+  name: 'Rahul',
+  age: 45,
+  genre: 'Fiction',
+  doctor: 'Falgun pareikh',
+  city: 'manipal'
+}
+{
+  _id: ObjectId('6a166b93a4d0074e86ee29af'),
+  name: 'Ashraf',
+  age: 66,
+  disease: 'Cough',
+  doctor: 'dushyant khan',
+  city: 'Surat'
+}
+db.patients.find().sort({age:-1})
+{
+  _id: ObjectId('6a166b93a4d0074e86ee29af'),
+  name: 'Ashraf',
+  age: 66,
+  disease: 'Cough',
+  doctor: 'dushyant khan',
+  city: 'Surat'
+}
+{
+  _id: ObjectId('6a166b93a4d0074e86ee29b0'),
+  name: 'Rahul',
+  age: 45,
+  genre: 'Fiction',
+  doctor: 'Falgun pareikh',
+  city: 'manipal'
+}
+{
+  _id: ObjectId('6a166b93a4d0074e86ee29ac'),
+  name: 'Harry ',
+  age: 21,
+  disease: 'Hiv',
+  doctor: 'Ramesh Chako',
+  city: 'Pune'
+}
+db.patients.find().limit(2)
+{
+  _id: ObjectId('6a166b93a4d0074e86ee29ac'),
+  name: 'Harry ',
+  age: 21,
+  disease: 'Hiv',
+  doctor: 'Ramesh Chako',
+  city: 'Pune'
+}
+{
+  _id: ObjectId('6a166b93a4d0074e86ee29af'),
+  name: 'Ashraf',
+  age: 66,
+  disease: 'Cough',
+  doctor: 'dushyant khan',
+  city: 'Surat'
+}
+db.patients.find().skip(2)
+{
+  _id: ObjectId('6a166b93a4d0074e86ee29b0'),
+  name: 'Rahul',
+  age: 45,
+  genre: 'Fiction',
+  doctor: 'Falgun pareikh',
+  city: 'manipal'
+}
+                            ^
+db.patients.find({age:{$gt:45}})
+{
+  _id: ObjectId('6a166b93a4d0074e86ee29af'),
+  name: 'Ashraf',
+  age: 66,
+  disease: 'Cough',
+  doctor: 'dushyant khan',
+  city: 'Surat'
+}
+db.patients.find({age:{$lt:25}})
+{
+  _id: ObjectId('6a166b93a4d0074e86ee29ac'),
+  name: 'Harry ',
+  age: 21,
+  disease: 'Hiv',
+  doctor: 'Ramesh Chako',
+  city: 'Pune'
+}
+                                       
+db.patients.find({$or:[{disease:"Cough"},{age:{$gt:60}}]})
+{
+  _id: ObjectId('6a166b93a4d0074e86ee29af'),
+  name: 'Ashraf',
+  age: 66,
+  disease: 'Cough',
+  doctor: 'dushyant khan',
+  city: 'Surat'
+}
+                                      
+db.books.find({$and:[{disease:"Cough"},{age:{$gt:60}}]})
+{
+  _id: ObjectId('6a166b93a4d0074e86ee29af'),
+  name: 'Ashraf',
+  age: 66,
+  disease: 'Cough',
+  doctor: 'dushyant khan',
+  city: 'Surat'
+}
